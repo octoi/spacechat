@@ -6,8 +6,7 @@
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register ./src/app.ts",
     "dev": "nodemon ./src/app.ts",
-    "build": "tsc -p . && resolve-tspaths",
-    "migrate": "prisma migrate dev --name migration"
+    "build": "tsc -p . && resolve-tspaths"
   },
   "repository": {
     "type": "git",
@@ -22,10 +21,12 @@
   "devDependencies": {
     "@types/node": "^18.15.10",
     "nodemon": "^2.0.22",
-    "prisma": "^4.11.0",
     "resolve-tspaths": "^0.8.8",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.2",
     "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "mongoose": "^7.0.3"
   }
 }
