@@ -1,0 +1,31 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "api code for airmail.",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node -r tsconfig-paths/register ./src/app.ts",
+    "dev": "nodemon ./src/app.ts",
+    "build": "tsc -p . && resolve-tspaths",
+    "migrate": "prisma migrate dev --name migration"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/octoi/airmail.git"
+  },
+  "author": "fadhilsaheer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/octoi/airmail/issues"
+  },
+  "homepage": "https://github.com/octoi/airmail#readme",
+  "devDependencies": {
+    "@types/node": "^18.15.10",
+    "nodemon": "^2.0.22",
+    "prisma": "^4.11.0",
+    "resolve-tspaths": "^0.8.8",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.2",
+    "typescript": "^5.0.2"
+  }
+}
