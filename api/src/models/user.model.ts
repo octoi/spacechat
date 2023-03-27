@@ -41,9 +41,17 @@ export const getUser = ({ id, email }: { id?: string; email?: string }) => {
   return id ? UserModel.findById(id) : UserModel.findOne({ email });
 };
 
-export const updateUser = (data: User) => {
+interface UpdateUserArgs {
+  id: string;
+  name?: string;
+  email?: string;
+  password?: string;
+  profile?: string;
+}
+
+export const updateUser = (data: UpdateUserArgs) => {
   return new Promise<UserResponse>((resolve, reject) => {
-    UserModel.findByIdAndUpdate(data._id, data)
+    UserModel.findByIdAndUpdate(data.id, data, { new: true })
       .then((user: any) => resolve(user))
       .catch((err: MongooseError) => {
         if (err.code == 11000) {
