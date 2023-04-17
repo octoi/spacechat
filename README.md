@@ -1,4 +1,4 @@
-# airmail
-Just another email app.
+# SPACECHAT
+Yet another messaging app.
 
 > WIP
