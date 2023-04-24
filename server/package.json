@@ -22,7 +22,9 @@
     "author": "fadhilsaheer",
     "license": "MIT",
     "devDependencies": {
+        "@types/bcrypt": "^5.0.0",
         "@types/node": "^18.15.13",
+        "@types/uuid": "^9.0.1",
         "@typescript-eslint/eslint-plugin": "^5.59.0",
         "@typescript-eslint/parser": "^5.59.0",
         "eslint": "^8.39.0",
@@ -35,6 +37,8 @@
         "typescript": "^5.0.4"
     },
     "dependencies": {
-        "mongoose": "^7.0.4"
+        "bcrypt": "^5.1.0",
+        "mongoose": "^7.0.4",
+        "uuid": "^9.0.0"
     }
 }
