@@ -1,12 +1,15 @@
 # SERVER
+
 > Server code for spacechat
 
 ## Functionality
+
 - Realtime communication using `socket.io`
 - Handling Users, Rooms using `mongoDB`
 
 ## Setup
-1. Create `.env` file by checking `.env.example` 
+
+1. Create `.env` file by checking `.env.example`
 2. Install packages
    ```bash
    $ pnpm install
@@ -21,6 +24,7 @@
 > WIP
 
 ## TODO
+
 - [x] MONGODB setup
 - [x] User model
   - [x] create user
@@ -42,4 +46,4 @@
   - [ ] create message
   - [ ] read message
   - [ ] delete message
-> More todo to add..
+    > More todo to add..
