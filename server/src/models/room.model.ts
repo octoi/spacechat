@@ -16,3 +16,18 @@ const RoomSchema = new mongoose.Schema(
     collection: 'rooms',
   }
 );
+
+const RoomModel = mongoose.model('Room', RoomSchema);
+
+interface CreateRoomArgs {
+  name: string;
+  profile: string;
+}
+
+export const createRoom = (data: CreateRoomArgs) => {
+  return new Promise(async (resolve, reject) => {
+    RoomModel.create({ data })
+      .then(resolve)
+      .catch(() => reject('Failed to create room'));
+  });
+};
