@@ -31,3 +31,17 @@ export const createRoom = (data: CreateRoomArgs) => {
       .catch(() => reject('Failed to create room'));
   });
 };
+
+interface UpdateRoomArgs {
+  name?: string;
+  description?: string;
+  profile?: string;
+}
+
+export const updateRoom = (id: string, data: UpdateRoomArgs) => {
+  return new Promise((resolve, reject) => {
+    RoomModel.updateOne({ _id: id }, { ...data })
+      .then(resolve)
+      .catch(reject);
+  });
+};
