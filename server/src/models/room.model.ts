@@ -45,3 +45,7 @@ export const updateRoom = (id: string, data: UpdateRoomArgs) => {
       .catch(reject);
   });
 };
+
+export const deleteRoom = (id: string) => {
+  return RoomModel.deleteOne({ _id: id });
+};
