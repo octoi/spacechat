@@ -1,44 +1,44 @@
 {
-    "name": "server",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "start": "ts-node -r tsconfig-paths/register ./src/app.ts",
-        "dev": "nodemon ./src/app.ts",
-        "build": "tsc -p . && resolve-tspaths",
-        "lint:check": "eslint ./src",
-        "lint:fix": "eslint --fix ./src",
-        "format": "prettier --write ./src"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/octoi/spacechat.git"
-    },
-    "bugs": {
-        "url": "https://github.com/octoi/spacechat/issues"
-    },
-    "homepage": "https://github.com/octoi/spacechat#readme",
-    "author": "fadhilsaheer",
-    "license": "MIT",
-    "devDependencies": {
-        "@types/bcrypt": "^5.0.0",
-        "@types/node": "^18.15.13",
-        "@types/uuid": "^9.0.1",
-        "@typescript-eslint/eslint-plugin": "^5.59.0",
-        "@typescript-eslint/parser": "^5.59.0",
-        "eslint": "^8.39.0",
-        "eslint-config-prettier": "^8.8.0",
-        "nodemon": "^2.0.22",
-        "prettier": "^2.8.7",
-        "resolve-tspaths": "^0.8.13",
-        "ts-node": "^10.9.1",
-        "tsconfig-paths": "^4.2.0",
-        "typescript": "^5.0.4"
-    },
-    "dependencies": {
-        "bcrypt": "^5.1.0",
-        "mongoose": "^7.0.4",
-        "uuid": "^9.0.0"
-    }
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server for spacechat",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node -r tsconfig-paths/register ./src/app.ts",
+    "dev": "nodemon ./src/app.ts",
+    "build": "tsc -p . && resolve-tspaths",
+    "lint:check": "eslint ./src",
+    "lint:fix": "eslint --fix ./src",
+    "format": "prettier --write ./src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/octoi/spacechat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/octoi/spacechat/issues"
+  },
+  "homepage": "https://github.com/octoi/spacechat#readme",
+  "author": "fadhilsaheer",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/node": "^18.15.13",
+    "@types/uuid": "^9.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.7",
+    "resolve-tspaths": "^0.8.13",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "mongoose": "^7.0.4",
+    "uuid": "^9.0.0"
+  }
 }
