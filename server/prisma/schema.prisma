@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String     @id @default(uuid())
+  username        String     @unique
+  name            String
+  password        String
+  profile         String
+  about           String?
+  adminChatRooms  ChatRoom[] @relation("admins")
+  joinedChatRooms ChatRoom[] @relation("members")
+  messages        Message[]  @relation("user message")
+  seenMessages    Message[]  @relation("seen messages")
+}
+
+enum ChatRoomType {
+  PERSONAL
+  GROUP
+}
+
+model ChatRoom {
+  id          String       @id @default(uuid())
+  name        String
+  description String?
+  profile     String
+  createdAt   DateTime     @default(now())
+  type        ChatRoomType @default(GROUP)
+  admins      User[]       @relation("admins")
+  members     User[]       @relation("members")
+  messages    Message[]    @relation("messages")
+}
+
+enum MessageType {
+  TEXT
+  VOICE
+  IMAGE
+  VIDEO
+  DOCUMENT
+}
+
+model Message {
+  id         String      @id @default(uuid())
+  type       MessageType @default(TEXT)
+  message    String // text messsage or media URL
+  createdAt  DateTime    @default(now())
+  userId     String // user who posted the message
+  user       User        @relation(name: "user message", fields: [userId], references: [id])
+  chatRoomId String
+  chatRoom   ChatRoom    @relation(name: "messages", fields: [chatRoomId], references: [id], onDelete: Cascade)
+  seenBy     User[]      @relation("seen messages") // users who saw the message
+}
