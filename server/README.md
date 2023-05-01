@@ -5,7 +5,7 @@
 ## Functionality
 
 - Realtime communication using `socket.io`
-- Handling Users, Rooms using `mongoDB`
+- Handling Users, Rooms using `postgres`
 
 ## Setup
 
@@ -22,28 +22,3 @@
    ```
 
 > WIP
-
-## TODO
-
-- [x] MONGODB setup
-- [x] User model
-  - [x] create user
-  - [x] get user by `username` or `id`
-  - [x] update user
-  - [x] search user
-- [ ] User controller
-  - [ ] register user
-  - [ ] login user
-- [ ] Room model
-  - [ ] create room
-  - [ ] join room
-  - [ ] update room
-  - [ ] delete room
-  - [ ] search rooms
-  - [ ] get user rooms
-  - [ ] get given room
-  - [ ] get messages of a room
-  - [ ] create message
-  - [ ] read message
-  - [ ] delete message
-    > More todo to add..
