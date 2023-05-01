@@ -39,6 +39,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@prisma/client": "4.13.0",
     "bcrypt": "^5.1.0"
   }
 }
