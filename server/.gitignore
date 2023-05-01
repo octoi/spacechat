@@ -133,4 +133,4 @@ dist
 pnpm-lock.yaml
 
 # Prisma migrations
-migrations/*
+migrations
