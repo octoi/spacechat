@@ -38,8 +38,6 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "bcrypt": "^5.1.0",
-    "mongoose": "^7.0.4",
-    "uuid": "^9.0.0"
+    "bcrypt": "^5.1.0"
   }
 }
