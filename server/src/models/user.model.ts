@@ -30,6 +30,24 @@ export const findUser = ({ username, id }: FindUserArgs) => {
   });
 };
 
+interface LoginUserData {
+  username: string;
+  password: string;
+}
+
+export const loginUser = (data: LoginUserData) => {
+  return new Promise(async (resolve, reject) => {
+    const user: any = await findUser({ username: data.username }).catch(reject);
+    if (!user) return;
+
+    bcrypt.compare(data.password, user?.password, (err, res) => {
+      if (err) return reject('Failed to validate password');
+      if (!res) return reject('Invalid password');
+      resolve(user);
+    });
+  });
+};
+
 interface RegisterUserData {
   name: string;
   username: string;
