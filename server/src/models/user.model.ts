@@ -1,6 +1,35 @@
 import bcrypt from 'bcrypt';
 import { prismaClient } from './prisma';
 
+interface FindUserArgs {
+  username?: string;
+  id?: string;
+}
+
+export const findUser = ({ username, id }: FindUserArgs) => {
+  return new Promise((resolve, reject) => {
+    if (!(username || id)) {
+      reject('Username or userId is not provided.');
+      return;
+    }
+
+    prismaClient.user
+      .findUnique({
+        where: { username, id },
+      })
+      .then((user: any) => {
+        if (!user) {
+          reject('User does not exist');
+          return;
+        }
+        resolve(user);
+      })
+      .catch(() => {
+        reject('Failed to find user');
+      });
+  });
+};
+
 interface RegisterUserData {
   name: string;
   username: string;
