@@ -77,3 +77,30 @@ export const registerUser = (data: RegisterUserData) => {
       });
   });
 };
+
+interface UpdateUserData {
+  name?: string;
+  username?: string;
+  password?: string;
+  profile?: string;
+  about?: string;
+}
+
+export const updateUser = (userId: string, data: UpdateUserData) => {
+  return new Promise(async (resolve, reject) => {
+    // const user: any = findUser({ id: userId }).catch(reject);
+    // if (!user) return;
+
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, 10);
+    }
+
+    prismaClient.user
+      .update({
+        where: { id: userId },
+        data,
+      })
+      .then(resolve)
+      .catch(() => reject('Failed to update user'));
+  });
+};
