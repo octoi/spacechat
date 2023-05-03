@@ -141,7 +141,6 @@ export const removeMember = ({
 };
 
 // check if given user is admin of given chat room
-
 export const authenticateChatRoomAdmin = ({
   userId,
   roomId,
@@ -153,6 +152,19 @@ export const authenticateChatRoomAdmin = ({
     where: {
       id: roomId,
       admins: {
+        some: {
+          id: userId,
+        },
+      },
+    },
+  });
+};
+
+// get all chat rooms which user is connected
+export const getUserChatRooms = (userId: string) => {
+  return prismaClient.chatRoom.findMany({
+    where: {
+      members: {
         some: {
           id: userId,
         },
