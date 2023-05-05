@@ -48,3 +48,22 @@ export const getChatMessages = (roomId: string) => {
     },
   });
 };
+
+export const markAsSeen = ({
+  userId,
+  messageId,
+}: {
+  userId: string;
+  messageId: string;
+}) => {
+  return prismaClient.message.update({
+    where: { id: messageId },
+    data: {
+      seenBy: {
+        connect: {
+          id: userId,
+        },
+      },
+    },
+  });
+};
