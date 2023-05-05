@@ -27,3 +27,24 @@ export const deleteMessage = (messageId: string) => {
     },
   });
 };
+
+export const getChatMessages = (roomId: string) => {
+  return prismaClient.message.findMany({
+    where: {
+      chatRoomId: roomId,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+    include: {
+      user: {
+        select: {
+          id: true,
+          username: true,
+          name: true,
+          profile: true,
+        },
+      },
+    },
+  });
+};
