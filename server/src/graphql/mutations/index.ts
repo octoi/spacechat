@@ -4,6 +4,10 @@ import {
   RegisterMutation,
   UpdateMutation,
 } from './user.mutation';
+import {
+  CreateChatRoomMutation,
+  UpdateChatRoomMutation,
+} from './chatroom.mutation';
 
 export const Mutations = new GraphQLObjectType({
   name: 'Mutations',
@@ -12,5 +16,8 @@ export const Mutations = new GraphQLObjectType({
     register: RegisterMutation,
     login: LoginMutation,
     updateUser: UpdateMutation,
+    // chatroom mutations
+    createChatRoom: CreateChatRoomMutation,
+    updateChatRoom: UpdateChatRoomMutation,
   }),
 });
