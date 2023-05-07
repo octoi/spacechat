@@ -4,6 +4,7 @@ interface CreateChatRoomData {
   creatorId: string;
   name: string;
   profile: string;
+  type: 'PERSONAL' | 'GROUP';
 }
 
 export const createChatRoom = (data: CreateChatRoomData) => {
