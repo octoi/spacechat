@@ -1,13 +1,9 @@
-import { GraphQLObjectType, GraphQLString } from 'graphql';
+import { GraphQLObjectType } from 'graphql';
+import { GetUserQuery } from './user.query';
 
 export const Queries = new GraphQLObjectType({
   name: 'Queries',
   fields: () => ({
-    hello: {
-      type: GraphQLString,
-      resolve() {
-        return 'hello';
-      },
-    },
+    getUser: GetUserQuery,
   }),
 });
