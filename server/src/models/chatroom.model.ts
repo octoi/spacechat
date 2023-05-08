@@ -149,15 +149,57 @@ export const authenticateChatRoomAdmin = ({
   userId: string;
   roomId: string;
 }) => {
-  return prismaClient.chatRoom.findFirst({
-    where: {
-      id: roomId,
-      admins: {
-        some: {
-          id: userId,
+  return new Promise((resolve, reject) => {
+    prismaClient.chatRoom
+      .findFirst({
+        where: {
+          id: roomId,
+          admins: {
+            some: {
+              id: userId,
+            },
+          },
         },
-      },
-    },
+      })
+      .then((user) => {
+        if (!user) {
+          return reject({ message: 'User not found' });
+        }
+
+        resolve(user);
+      })
+      .catch(reject);
+  });
+};
+
+// check if given user is member of given chat romo
+export const isChatRoomMember = ({
+  userId,
+  roomId,
+}: {
+  userId: string;
+  roomId: string;
+}) => {
+  return new Promise((resolve, reject) => {
+    prismaClient.chatRoom
+      .findFirst({
+        where: {
+          id: roomId,
+          members: {
+            some: {
+              id: userId,
+            },
+          },
+        },
+      })
+      .then((user) => {
+        if (!user) {
+          return reject({ message: 'User not found' });
+        }
+
+        resolve(user);
+      })
+      .catch(reject);
   });
 };
 
