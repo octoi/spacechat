@@ -3,10 +3,14 @@ import { getUserFromContext } from '@/utils/jwt';
 import { ValidatorMessage } from '@/utils/constants';
 import { ChatRoomType } from '../typedefs/chatroom.typedef';
 import { GraphQLDefaultFieldConfig } from '../typedefs/graphql.typedef';
+import { deleteChatRoom, removeMember } from '@/models/chatroom.model';
+import { makeAdmin } from '@/models/chatroom.model';
+import { dismissAdmin } from '@/models/chatroom.model';
 import {
   authenticateChatRoomAdmin,
   createChatRoom,
   updateChatRoom,
+  addMember,
 } from '@/models/chatroom.model';
 
 export const CreateChatRoomMutation: GraphQLDefaultFieldConfig = {
@@ -51,8 +55,8 @@ export const UpdateChatRoomMutation: GraphQLDefaultFieldConfig = {
     await authenticateChatRoomAdmin({
       userId: user?.id,
       roomId: requestArgs?.roomId,
-    }).catch((err) => {
-      throw new GraphQLError(err?.message);
+    }).catch(() => {
+      throw new GraphQLError('Permission denied');
     });
 
     const roomData = await updateChatRoom(requestArgs).catch((err) => {
@@ -60,5 +64,139 @@ export const UpdateChatRoomMutation: GraphQLDefaultFieldConfig = {
     });
 
     return roomData;
+  },
+};
+
+export const DeleteChatRoomMutation: GraphQLDefaultFieldConfig = {
+  type: ChatRoomType,
+  args: {
+    roomId: { type: GraphQLString },
+  },
+  async resolve(_, requestArgs, context) {
+    if (!requestArgs?.roomId) {
+      throw new GraphQLError(ValidatorMessage);
+    }
+
+    const user: any = getUserFromContext(context);
+    await authenticateChatRoomAdmin({
+      userId: user?.id,
+      roomId: requestArgs?.roomId,
+    }).catch(() => {
+      throw new GraphQLError('Permission denied');
+    });
+
+    const data = deleteChatRoom(requestArgs?.roomId).catch((err) => {
+      throw new GraphQLError(err?.message);
+    });
+
+    return data;
+  },
+};
+
+export const AddMemberMutation: GraphQLDefaultFieldConfig = {
+  type: ChatRoomType,
+  args: {
+    roomId: { type: GraphQLString },
+    userId: { type: GraphQLString },
+  },
+  async resolve(_, requestArgs, context) {
+    if (!requestArgs?.roomId || !requestArgs?.userId) {
+      throw new GraphQLError(ValidatorMessage);
+    }
+
+    const user: any = getUserFromContext(context);
+    await authenticateChatRoomAdmin({
+      userId: user?.id,
+      roomId: requestArgs?.roomId,
+    }).catch(() => {
+      throw new GraphQLError('Permission denied');
+    });
+
+    const data = await addMember(requestArgs).catch((err) => {
+      throw new GraphQLError(err?.message);
+    });
+
+    return data;
+  },
+};
+
+export const RemoveMemberMutation: GraphQLDefaultFieldConfig = {
+  type: ChatRoomType,
+  args: {
+    roomId: { type: GraphQLString },
+    userId: { type: GraphQLString },
+  },
+  async resolve(_, requestArgs, context) {
+    if (!requestArgs?.roomId || !requestArgs?.userId) {
+      throw new GraphQLError(ValidatorMessage);
+    }
+
+    const user: any = getUserFromContext(context);
+    await authenticateChatRoomAdmin({
+      userId: user?.id,
+      roomId: requestArgs?.roomId,
+    }).catch(() => {
+      throw new GraphQLError('Permission denied');
+    });
+
+    const data = await removeMember(requestArgs).catch((err) => {
+      throw new GraphQLError(err?.message);
+    });
+
+    return data;
+  },
+};
+
+export const MakeAdminMutation: GraphQLDefaultFieldConfig = {
+  type: ChatRoomType,
+  args: {
+    roomId: { type: GraphQLString },
+    userId: { type: GraphQLString },
+  },
+  async resolve(_, requestArgs, context) {
+    if (!requestArgs?.roomId || !requestArgs?.userId) {
+      throw new GraphQLError(ValidatorMessage);
+    }
+
+    const user: any = getUserFromContext(context);
+    await authenticateChatRoomAdmin({
+      userId: user?.id,
+      roomId: requestArgs?.roomId,
+    }).catch(() => {
+      throw new GraphQLError('Permission denied');
+    });
+
+    const data = await makeAdmin(requestArgs).catch((err) => {
+      throw new GraphQLError(err?.message);
+    });
+
+    return data;
+  },
+};
+
+export const DismissAdminMutation: GraphQLDefaultFieldConfig = {
+  type: ChatRoomType,
+  args: {
+    roomId: { type: GraphQLString },
+    userId: { type: GraphQLString },
+  },
+  async resolve(_, requestArgs, context) {
+    if (!requestArgs?.roomId || !requestArgs?.userId) {
+      throw new GraphQLError(ValidatorMessage);
+    }
+
+    const user: any = getUserFromContext(context);
+    await authenticateChatRoomAdmin({
+      userId: user?.id,
+      roomId: requestArgs?.roomId,
+    }).catch(() => {
+      throw new GraphQLError('Permission denied');
+    });
+
+    const data = await dismissAdmin(requestArgs).catch((err) => {
+      throw new GraphQLError(err?.message);
+    });
+
+    return data;
   },
 };
