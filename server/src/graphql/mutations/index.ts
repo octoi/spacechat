@@ -7,6 +7,7 @@ import {
 import {
   AddMemberMutation,
   CreateChatRoomMutation,
+  DeleteChatRoomMutation,
   DismissAdminMutation,
   MakeAdminMutation,
   RemoveMemberMutation,
@@ -23,6 +24,7 @@ export const Mutations = new GraphQLObjectType({
     // chatroom mutations
     createChatRoom: CreateChatRoomMutation,
     updateChatRoom: UpdateChatRoomMutation,
+    deleteChatRoom: DeleteChatRoomMutation,
     // chatroom user mutation
     addMember: AddMemberMutation,
     removeMember: RemoveMemberMutation,
