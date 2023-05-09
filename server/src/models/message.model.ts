@@ -67,3 +67,33 @@ export const markAsSeen = ({
     },
   });
 };
+
+export const getUnreadMessageCount = ({
+  roomId,
+  userId,
+}: {
+  roomId: string;
+  userId: string;
+}) => {
+  return new Promise((resolve, reject) => {
+    prismaClient.message
+      .findMany({
+        where: {
+          chatRoomId: roomId,
+          seenBy: {
+            none: {
+              id: userId,
+            },
+          },
+        },
+      })
+      .then((messages) => {
+        if (messages) {
+          resolve(messages?.length);
+        } else {
+          resolve(0);
+        }
+      })
+      .catch(reject);
+  });
+};
