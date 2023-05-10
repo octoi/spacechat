@@ -1,7 +1,7 @@
 import { GraphQLObjectType } from 'graphql';
 import { GetUserQuery } from './user.query';
 import { GetChatRoomQuery, GetUserChatRoomsQuery } from './chatoom.query';
-import { GetRoomMessages } from './message.query';
+import { GetRoomMessages, GetUnreadMessageCount } from './message.query';
 
 export const Queries = new GraphQLObjectType({
   name: 'Queries',
@@ -13,5 +13,6 @@ export const Queries = new GraphQLObjectType({
     getUserChatRooms: GetUserChatRoomsQuery,
     // messages
     getChatMessages: GetRoomMessages,
+    getUnreadMessageCount: GetUnreadMessageCount,
   }),
 });
