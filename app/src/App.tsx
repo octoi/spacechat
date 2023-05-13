@@ -1,3 +1,5 @@
+import { AuthWrapper } from './components/authWrapper';
+
 export default function App() {
-  return <div>Hello World</div>;
+  return <AuthWrapper>Hello World</AuthWrapper>;
 }
