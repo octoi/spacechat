@@ -21,4 +21,6 @@
    $ pnpm dev
    ```
 
-> WIP
+## TODO
+[ ] Setup socket.io
+[ ] Setup redis for realtime user status update
