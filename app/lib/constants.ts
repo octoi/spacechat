@@ -6,3 +6,5 @@ export enum Paths {
   user = '/user',
   notFound = '/404',
 }
+
+export const GRAPHQL_ENDPOINT = 'http://localhost:5000/graphql';
