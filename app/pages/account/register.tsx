@@ -60,7 +60,7 @@ export default function RegisterPage() {
   return (
     <Layout title='Register'>
       <Center mt={10}>
-        <Flex direction='column' p={8} className='w-full max-w-xl'>
+        <Flex direction='column' className='w-full max-w-xl'>
           <Heading fontSize='3xl' mb={5}>
             Register
           </Heading>
