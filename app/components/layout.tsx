@@ -25,7 +25,7 @@ export const Layout: ReactComponent<Props> = ({
         <meta property='og:image' content={image} />
         <meta property='og:type' content='website' />
       </Head>
-      <div className='p-5'>{children}</div>
+      <div>{children}</div>
     </>
   );
 };
