@@ -15,6 +15,7 @@ import {
   MoreVertical,
   SettingsIcon,
 } from 'lucide-react';
+import { LogoutWrapper } from './logoutWrapper';
 
 export const Profile: React.FC = () => {
   const user = userStore.getState().user;
@@ -58,12 +59,14 @@ export const Profile: React.FC = () => {
             >
               Settings
             </MenuItem>
-            <MenuItem
-              className='bg-app-dark3 hover:bg-app-dark4'
-              icon={<LogOutIcon size={18} />}
-            >
-              Logout
-            </MenuItem>
+            <LogoutWrapper>
+              <MenuItem
+                className='bg-app-dark3 hover:bg-app-dark4'
+                icon={<LogOutIcon size={18} />}
+              >
+                Logout
+              </MenuItem>
+            </LogoutWrapper>
           </MenuList>
         </Menu>
       </div>
