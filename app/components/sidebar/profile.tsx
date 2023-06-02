@@ -1,4 +1,13 @@
 import React from 'react';
+import { userStore } from '@/store/user.store';
+import { LogoutWrapper } from './logoutWrapper';
+import { SettingsWrapper } from './settingsWrapper';
+import {
+  LogOutIcon,
+  MessageSquarePlusIcon,
+  MoreVertical,
+  SettingsIcon,
+} from 'lucide-react';
 import {
   Avatar,
   IconButton,
@@ -8,14 +17,6 @@ import {
   MenuList,
   Tooltip,
 } from '@chakra-ui/react';
-import { userStore } from '@/store/user.store';
-import {
-  LogOutIcon,
-  MessageSquarePlusIcon,
-  MoreVertical,
-  SettingsIcon,
-} from 'lucide-react';
-import { LogoutWrapper } from './logoutWrapper';
 
 export const Profile: React.FC = () => {
   const user = userStore.getState().user;
@@ -24,7 +25,13 @@ export const Profile: React.FC = () => {
 
   return (
     <div className='bg-app-dark3 p-5 flex items-center justify-between'>
-      <Avatar src={user.profile} name={user.name} className='cursor-pointer' />
+      <SettingsWrapper>
+        <Avatar
+          src={user.profile}
+          name={user.name}
+          className='cursor-pointer'
+        />
+      </SettingsWrapper>
       <div className='flex items-center space-x-2'>
         <Tooltip label='New chat' className='bg-app-dark4 text-app-text'>
           <IconButton
@@ -53,12 +60,14 @@ export const Profile: React.FC = () => {
             >
               New chat
             </MenuItem>
-            <MenuItem
-              className='bg-app-dark3 hover:bg-app-dark4'
-              icon={<SettingsIcon size={18} />}
-            >
-              Settings
-            </MenuItem>
+            <SettingsWrapper>
+              <MenuItem
+                className='bg-app-dark3 hover:bg-app-dark4'
+                icon={<SettingsIcon size={18} />}
+              >
+                Settings
+              </MenuItem>
+            </SettingsWrapper>
             <LogoutWrapper>
               <MenuItem
                 className='bg-app-dark3 hover:bg-app-dark4'
