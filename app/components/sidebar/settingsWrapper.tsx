@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ReactComponent } from '@/lib/types/react.type';
+import { userStore } from '@/store/user.store';
+import { ImagePlus } from 'lucide-react';
 import {
   Drawer,
   DrawerBody,
@@ -15,8 +17,6 @@ import {
   Input,
   Textarea,
 } from '@chakra-ui/react';
-import { userStore } from '@/store/user.store';
-import { ImagePlus } from 'lucide-react';
 
 export const SettingsWrapper: ReactComponent = ({ children }) => {
   const user = userStore.getState().user;
@@ -25,6 +25,12 @@ export const SettingsWrapper: ReactComponent = ({ children }) => {
   const btnRef = React.useRef<any>();
 
   if (!user) return null;
+
+  const [name, setName] = useState(user.name);
+  const [username, setUsername] = useState(user.username);
+  const [profile, setProfile] = useState(user.profile);
+  const [password, setPassword] = useState('');
+  const [about, setAbout] = useState(user.about || '');
 
   return (
     <>
@@ -44,7 +50,7 @@ export const SettingsWrapper: ReactComponent = ({ children }) => {
 
           <DrawerBody>
             <Center className='relative group'>
-              <Avatar src={user.profile} name={user.name} size='2xl' />
+              <Avatar src={profile} name={user.name} size='2xl' />
               <Avatar
                 size='2xl'
                 icon={<ImagePlus />}
@@ -56,22 +62,31 @@ export const SettingsWrapper: ReactComponent = ({ children }) => {
               <Input
                 placeholder='Your Name'
                 size='lg'
-                value={user.name}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 variant='filled'
               />
               <p className='my-2 text-app-text2'>Username</p>
               <Input
                 placeholder='Username'
                 size='lg'
-                value={user.username}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 variant='filled'
               />
               <p className='my-2 text-app-text2'>New Password</p>
-              <Input placeholder='New Password' size='lg' variant='filled' />
+              <Input
+                placeholder='New Password'
+                size='lg'
+                variant='filled'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
               <p className='my-2 text-app-text2'>About</p>
               <Textarea
                 placeholder='About'
-                value={user.about}
+                value={about}
+                onChange={(e) => setAbout(e.target.value)}
                 variant='filled'
                 size='lg'
               />
@@ -79,10 +94,10 @@ export const SettingsWrapper: ReactComponent = ({ children }) => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
+            <Button variant='outline' mr={2} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme='blue'>Save</Button>
+            <Button className='btn-primary'>Save</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
