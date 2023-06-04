@@ -71,7 +71,7 @@ export const SettingsWrapper: ReactComponent = ({ children }) => {
                 placeholder='Username'
                 size='lg'
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => setUsername(e.target.value.trim())}
                 variant='filled'
               />
               <p className='my-2 text-app-text2'>New Password</p>

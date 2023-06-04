@@ -83,7 +83,7 @@ export default function RegisterPage() {
               placeholder='Username'
               required
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value.trim())}
               disabled={loading}
             />
             <Input

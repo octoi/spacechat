@@ -66,7 +66,7 @@ export default function LoginPage() {
               size='lg'
               variant='filled'
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value.trim())}
               disabled={loading}
               required
             />
