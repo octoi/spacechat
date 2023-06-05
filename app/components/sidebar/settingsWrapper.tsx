@@ -28,9 +28,11 @@ export const SettingsWrapper: ReactComponent = ({ children }) => {
 
   const [name, setName] = useState(user.name);
   const [username, setUsername] = useState(user.username);
-  const [profile, setProfile] = useState(user.profile);
+  const [profile, setProfile] = useState<string | undefined>(user.profile);
   const [password, setPassword] = useState('');
   const [about, setAbout] = useState(user.about || '');
+
+  const fileInputRef = React.useRef<any>();
 
   return (
     <>
@@ -55,6 +57,32 @@ export const SettingsWrapper: ReactComponent = ({ children }) => {
                 size='2xl'
                 icon={<ImagePlus />}
                 className='bg-black bg-opacity-60 cursor-pointer transition-all duration-200 opacity-0 absolute group-hover:opacity-100'
+                onClick={() => fileInputRef.current?.click()}
+              />
+              <input
+                type='file'
+                accept='image/*'
+                ref={fileInputRef}
+                className='hidden'
+                onChange={(e) => {
+                  if (!e.target.files || e.target.files.length === 0) {
+                    setProfile(undefined);
+                    return;
+                  }
+
+                  if (e.target.files[0].type.includes('image/')) {
+                    let file = e.target.files[0];
+                    let reader = new FileReader();
+
+                    reader.onloadend = () => {
+                      setProfile(URL.createObjectURL(file));
+                    };
+
+                    if (file) reader.readAsDataURL(file);
+                  } else {
+                    alert('Unsupported file type');
+                  }
+                }}
               />
             </Center>
             <div className='mt-10'>
