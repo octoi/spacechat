@@ -106,6 +106,7 @@ export const SettingsWrapper: ReactComponent = ({ children }) => {
               <Input
                 placeholder='New Password'
                 size='lg'
+                type='password'
                 variant='filled'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
