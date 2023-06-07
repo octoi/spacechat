@@ -21,7 +21,7 @@ import {
 export const SettingsWrapper: ReactComponent = ({ children }) => {
   const user = userStore.getState().user;
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose: closeDrawer } = useDisclosure();
   const btnRef = React.useRef<any>();
 
   if (!user) return null;
@@ -33,6 +33,16 @@ export const SettingsWrapper: ReactComponent = ({ children }) => {
   const [about, setAbout] = useState(user.about || '');
 
   const fileInputRef = React.useRef<any>();
+
+  const onClose = () => {
+    setName(user.name);
+    setUsername(user.username);
+    setProfile(user.profile);
+    setPassword('');
+    setAbout(user.about || '');
+
+    closeDrawer();
+  };
 
   return (
     <>
