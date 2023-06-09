@@ -16,7 +16,7 @@ export const getApolloClient = () => {
   });
 
   const httpLink = createHttpLink({
-    uri: process.env.GRAPHQL_ENDPOINT || GRAPHQL_ENDPOINT,
+    uri: GRAPHQL_ENDPOINT,
   });
 
   return new ApolloClient({
