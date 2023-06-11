@@ -44,6 +44,8 @@ export const SettingsWrapper: ReactComponent = ({ children }) => {
     closeDrawer();
   };
 
+  const handleSubmit = () => {};
+
   return (
     <>
       <div onClick={onOpen}>{children}</div>
@@ -136,7 +138,9 @@ export const SettingsWrapper: ReactComponent = ({ children }) => {
             <Button variant='outline' mr={2} onClick={onClose}>
               Cancel
             </Button>
-            <Button className='btn-primary'>Save</Button>
+            <Button className='btn-primary' onClick={handleSubmit}>
+              Save
+            </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
