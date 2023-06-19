@@ -7,6 +7,7 @@ import {
   MessageSquarePlusIcon,
   MoreVertical,
   SettingsIcon,
+  User2,
 } from 'lucide-react';
 import {
   Avatar,
@@ -17,6 +18,8 @@ import {
   MenuList,
   Tooltip,
 } from '@chakra-ui/react';
+import { NewGroupChatWrapper } from './newChat/newGroupChatWrapper';
+import { NewPersonalChatWrapper } from './newChat/newPersonalChatWrapper';
 
 export const Profile: React.FC = () => {
   const user = userStore.getState().user;
@@ -33,16 +36,21 @@ export const Profile: React.FC = () => {
         />
       </SettingsWrapper>
       <div className='flex items-center space-x-2'>
-        <Tooltip label='New chat' className='bg-app-dark4 text-app-text'>
-          <IconButton
-            aria-label='New chat'
-            icon={<MessageSquarePlusIcon />}
-            borderRadius='full'
-            size='lg'
-            variant='ghost'
-            className='hover:bg-app-dark4'
-          />
-        </Tooltip>
+        <NewGroupChatWrapper>
+          <Tooltip
+            label='New group chat'
+            className='bg-app-dark4 text-app-text'
+          >
+            <IconButton
+              aria-label='New chat'
+              icon={<MessageSquarePlusIcon />}
+              borderRadius='full'
+              size='lg'
+              variant='ghost'
+              className='hover:bg-app-dark4'
+            />
+          </Tooltip>
+        </NewGroupChatWrapper>
         <Menu>
           <MenuButton
             as={IconButton}
@@ -54,12 +62,22 @@ export const Profile: React.FC = () => {
             className='hover:bg-app-dark4'
           />
           <MenuList className='bg-app-dark3'>
-            <MenuItem
-              className='bg-app-dark3 hover:bg-app-dark4'
-              icon={<MessageSquarePlusIcon size={18} />}
-            >
-              New chat
-            </MenuItem>
+            <NewGroupChatWrapper>
+              <MenuItem
+                className='bg-app-dark3 hover:bg-app-dark4'
+                icon={<MessageSquarePlusIcon size={18} />}
+              >
+                New group chat
+              </MenuItem>
+            </NewGroupChatWrapper>
+            <NewPersonalChatWrapper>
+              <MenuItem
+                className='bg-app-dark3 hover:bg-app-dark4'
+                icon={<User2 size={18} />}
+              >
+                New personal chat
+              </MenuItem>
+            </NewPersonalChatWrapper>
             <SettingsWrapper>
               <MenuItem
                 className='bg-app-dark3 hover:bg-app-dark4'
