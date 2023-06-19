@@ -19,6 +19,7 @@ import {
   Tooltip,
 } from '@chakra-ui/react';
 import { NewGroupChatWrapper } from './newChat/newGroupChatWrapper';
+import { NewPersonalChatWrapper } from './newChat/newPersonalChatWrapper';
 
 export const Profile: React.FC = () => {
   const user = userStore.getState().user;
@@ -69,12 +70,14 @@ export const Profile: React.FC = () => {
                 New group chat
               </MenuItem>
             </NewGroupChatWrapper>
-            <MenuItem
-              className='bg-app-dark3 hover:bg-app-dark4'
-              icon={<User2 size={18} />}
-            >
-              New personal chat
-            </MenuItem>
+            <NewPersonalChatWrapper>
+              <MenuItem
+                className='bg-app-dark3 hover:bg-app-dark4'
+                icon={<User2 size={18} />}
+              >
+                New personal chat
+              </MenuItem>
+            </NewPersonalChatWrapper>
             <SettingsWrapper>
               <MenuItem
                 className='bg-app-dark3 hover:bg-app-dark4'
