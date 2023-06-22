@@ -1,4 +1,4 @@
-import create from 'zustand/vanilla';
+import { createStore } from 'zustand/vanilla';
 import { UserType } from '@/lib/types/user.type';
 import { getUserFromCookie } from '@/lib/cookie';
 
@@ -8,7 +8,7 @@ interface UserStore {
   removeUser: () => void;
 }
 
-export const userStore = create<UserStore>((set) => ({
+export const userStore = createStore<UserStore>((set) => ({
   user: getUserFromCookie(),
   setUser: (data) => set({ user: data }),
   removeUser: () => set({ user: null }),
