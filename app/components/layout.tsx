@@ -18,7 +18,7 @@ export const Layout: ReactComponent<Props> = ({
     <>
       <Head>
         <title>{title || 'Spacechat'}</title>
-        <link rel='icon' href={image || '/favicon.png'} />
+        <link rel='icon' href={image || '/icon.ico'} />
         <meta name='description' content={description} />
         <meta property='og:title' content={title} />
         <meta property='og:description' content={description} />
