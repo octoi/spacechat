@@ -1,11 +1,9 @@
 import fs from 'fs';
-import http from 'http';
 import cors from 'cors';
 import express from 'express';
 import multer from 'multer';
 
 const app = express();
-const httpServer = http.createServer(app);
 
 const PORT = process.env.PORT || 5000;
 
@@ -51,3 +49,5 @@ app.delete('/file/:filename', (req, res) => {
   });
 });
 
+const port = process.env.PORT || 5000;
+app.listen(port, () => console.log(`[🚀] http://localhost:${port}`))
