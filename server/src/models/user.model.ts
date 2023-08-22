@@ -76,3 +76,28 @@ export const loginUserModel = (data: {
     });
   });
 };
+
+export const updateUserModel = (
+  userId: number,
+  data: {
+    name?: string;
+    username?: string;
+    password?: string;
+    profile?: string;
+    about?: string;
+  }
+) => {
+  return new Promise(async (resolve, reject) => {
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, 10);
+    }
+
+    prismaClient.user
+      .update({
+        where: { id: userId },
+        data,
+      })
+      .then(resolve)
+      .catch(() => reject('Failed to update user'));
+  });
+};
