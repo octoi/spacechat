@@ -6,3 +6,40 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       Int       @id @default(autoincrement())
+  username String    @unique
+  name     String
+  password String
+  profile  String
+  about    String?
+  sent     Message[] @relation("User messages")
+  received Message[] @relation("Received messages")
+}
+
+enum MessageType {
+  TEXT
+  VOICE
+  IMAGE
+  VIDEO
+  DOCUMENT
+}
+
+enum MesssageStatus {
+  SENT
+  RECEIVED
+  SEEN
+}
+
+model Message {
+  id        Int            @id @default(autoincrement())
+  type      MessageType    @default(TEXT)
+  message   String // text message of media URL
+  createdAt DateTime       @default(now())
+  status    MesssageStatus @default(SENT)
+  authorId  Int
+  targetId  Int
+  author    User           @relation(name: "User messages", fields: [authorId], references: [id])
+  target    User           @relation(name: "Received messages", fields: [targetId], references: [id])
+}
