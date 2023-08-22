@@ -1,6 +1,35 @@
 import bcrypt from 'bcrypt';
 import { prismaClient } from './prisma';
 
+export const findUserModel = ({
+  username,
+  id,
+}: {
+  username?: string;
+  id?: number;
+}) => {
+  return new Promise((resolve, reject) => {
+    if (!(username || id)) {
+      reject('Username or userId is not provided.');
+      return;
+    }
+
+    prismaClient.user
+      .findUnique({
+        where: { username, id },
+      })
+      .then((user: any) => {
+        if (!user) {
+          reject('User does not exist');
+          return;
+        }
+
+        resolve(user);
+      })
+      .catch(() => reject('Failed to find user'));
+  });
+};
+
 export const registerUserModel = (data: {
   username: string;
   name: string;
@@ -8,7 +37,6 @@ export const registerUserModel = (data: {
   profile: string;
 }) => {
   return new Promise(async (resolve, reject) => {
-    ``;
     data.password = await bcrypt.hash(data.password, 10);
 
     prismaClient.user
@@ -27,5 +55,24 @@ export const registerUserModel = (data: {
 
         reject('Failed to register user');
       });
+  });
+};
+
+export const loginUserModel = (data: {
+  username: string;
+  password: string;
+}) => {
+  return new Promise(async (resolve, reject) => {
+    const user: any = await findUserModel({ username: data.username }).catch(
+      reject
+    );
+
+    if (!user) return;
+
+    bcrypt.compare(data.password, user?.password, (err, res) => {
+      if (err) return reject('Failed to validate password');
+      if (!res) return reject('Invalid password');
+      resolve(user);
+    });
   });
 };
