@@ -101,3 +101,57 @@ export const updateUserModel = (
       .catch(() => reject('Failed to update user'));
   });
 };
+
+export const getUserChatListModel = (userId: number) => {
+  return new Promise((resolve, reject) => {
+    prismaClient.user
+      .findMany({
+        where: {
+          OR: [
+            // fetching users who have sent given user messages
+            {
+              sent: {
+                some: {
+                  targetId: userId,
+                },
+              },
+            },
+            // fetching users who the given user sent messages to
+            {
+              received: {
+                some: {
+                  senderId: userId,
+                },
+              },
+            },
+          ],
+        },
+        include: {
+          _count: {
+            select: {
+              sent: {
+                // including count which is not seen
+                where: {
+                  targetId: userId,
+                  status: 'SENT' || 'RECEIVED',
+                  // OR: [{ status: 'SENT' }, { status: 'RECEIVED' }],
+                },
+              },
+            },
+          },
+          // get last message
+          sent: {
+            take: 1,
+            orderBy: {
+              createdAt: 'desc',
+            },
+          },
+        },
+      })
+      .then(resolve)
+      .catch((err) => {
+        console.log(err);
+        reject('Failed to fetch chat list');
+      });
+  });
+};

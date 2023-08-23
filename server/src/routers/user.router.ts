@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+  getUserChatListModel,
   loginUserModel,
   registerUserModel,
   updateUserModel,
@@ -69,6 +70,16 @@ userRouter.put('/update', (req, res) => {
             token: generateToken(data),
           });
         })
+        .catch((err) => res.status(500).json({ message: err }));
+    })
+    .catch((err) => res.status(402).json({ message: err }));
+});
+
+userRouter.get('/chat', (req, res) => {
+  getUserFromReq(req)
+    .then((user: any) => {
+      getUserChatListModel(user?.id)
+        .then((data) => res.status(200).json(data))
         .catch((err) => res.status(500).json({ message: err }));
     })
     .catch((err) => res.status(402).json({ message: err }));
