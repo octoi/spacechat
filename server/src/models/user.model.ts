@@ -126,7 +126,11 @@ export const getUserChatListModel = (userId: number) => {
             },
           ],
         },
-        include: {
+        select: {
+          id: true,
+          name: true,
+          username: true,
+          profile: true,
           _count: {
             select: {
               sent: {
@@ -149,9 +153,6 @@ export const getUserChatListModel = (userId: number) => {
         },
       })
       .then(resolve)
-      .catch((err) => {
-        console.log(err);
-        reject('Failed to fetch chat list');
-      });
+      .catch(() => reject('Failed to fetch chat list'));
   });
 };
