@@ -1,11 +1,12 @@
 import express from 'express';
+import { generateToken, getUserFromReq } from '@/utils/jwt';
+import { markMessagesAsReceivedModel } from '@/models/message.model';
 import {
   getUserChatListModel,
   loginUserModel,
   registerUserModel,
   updateUserModel,
 } from '@/models/user.model';
-import { generateToken, getUserFromReq } from '@/utils/jwt';
 
 export const userRouter = express.Router();
 
@@ -75,11 +76,15 @@ userRouter.put('/update', (req, res) => {
     .catch((err) => res.status(402).json({ message: err }));
 });
 
+// get user chat list & mark all sent messages as received
 userRouter.get('/chat', (req, res) => {
   getUserFromReq(req)
     .then((user: any) => {
       getUserChatListModel(user?.id)
-        .then((data) => res.status(200).json(data))
+        .then((data) => {
+          res.status(200).json(data);
+          markMessagesAsReceivedModel(user?.id);
+        })
         .catch((err) => res.status(500).json({ message: err }));
     })
     .catch((err) => res.status(402).json({ message: err }));

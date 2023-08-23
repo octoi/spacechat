@@ -27,7 +27,7 @@ export const getMessagesModel = ({
   });
 };
 
-export const sendMessage = ({
+export const sendMessageModel = ({
   senderId,
   targetId,
   message,
@@ -47,5 +47,21 @@ export const sendMessage = ({
       })
       .then(resolve)
       .catch(() => reject('Failed to send message'));
+  });
+};
+
+export const markMessagesAsReceivedModel = (targetId: number) => {
+  return new Promise((resolve, reject) => {
+    prismaClient.message
+      .updateMany({
+        where: {
+          targetId,
+        },
+        data: {
+          status: 'RECEIVED',
+        },
+      })
+      .then(resolve)
+      .catch(() => reject('Failed to mark status'));
   });
 };
