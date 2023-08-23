@@ -2,6 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import { fileRouter } from './routers/file.router';
 import { userRouter } from './routers/user.router';
+import { messageRouter } from './routers/message.router';
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use('/file', express.static('uploads')); // serving uploaded files to `file/
 app.use('/file', fileRouter);
 
 app.use('/user', userRouter);
+app.use('/message', messageRouter);
 
 // listen to port
 const PORT = process.env.PORT || 5000;
