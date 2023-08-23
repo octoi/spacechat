@@ -65,3 +65,26 @@ export const markMessagesAsReceivedModel = (targetId: number) => {
       .catch(() => reject('Failed to mark status'));
   });
 };
+
+export const markMessagesAsSeenModel = ({
+  senderId,
+  targetId,
+}: {
+  senderId: number;
+  targetId: number;
+}) => {
+  return new Promise((resolve, reject) => {
+    prismaClient.message
+      .updateMany({
+        where: {
+          senderId,
+          targetId,
+        },
+        data: {
+          status: 'SEEN',
+        },
+      })
+      .then(resolve)
+      .catch(() => reject('Failed to mark status'));
+  });
+};
