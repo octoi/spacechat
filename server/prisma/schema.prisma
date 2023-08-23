@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["filteredRelationCount"]
 }
 
 datasource db {
@@ -38,8 +39,8 @@ model Message {
   message   String // text message of media URL
   createdAt DateTime       @default(now())
   status    MesssageStatus @default(SENT)
-  authorId  Int
+  senderId  Int
   targetId  Int
-  author    User           @relation(name: "User messages", fields: [authorId], references: [id])
+  sender    User           @relation(name: "User messages", fields: [senderId], references: [id])
   target    User           @relation(name: "Received messages", fields: [targetId], references: [id])
 }
