@@ -5,6 +5,7 @@ import { Server as SocketServer } from 'socket.io';
 import { fileRouter } from './routers/file.router';
 import { userRouter } from './routers/user.router';
 import { messageRouter } from './routers/message.router';
+import { handleSocketConnection } from './socketIo';
 
 const app = express();
 const server = http.createServer(app);
@@ -22,7 +23,7 @@ app.use('/message', messageRouter);
 
 // connect socket.io
 io.listen(server, { cors: { origin: '*' } });
-io.on('connection', (socket) => {});
+handleSocketConnection(io);
 
 // listen to port
 const PORT = process.env.PORT || 5000;
