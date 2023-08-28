@@ -1,8 +1,46 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["filteredRelationCount"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  username String    @unique
+  name     String
+  password String
+  profile  String
+  about    String?
+  sent     Message[] @relation("User messages")
+  received Message[] @relation("Received messages")
+}
+
+enum MessageType {
+  TEXT
+  VOICE
+  IMAGE
+  VIDEO
+  DOCUMENT
+}
+
+enum MesssageStatus {
+  SENT
+  RECEIVED
+  SEEN
+}
+
+model Message {
+  id        Int            @id @default(autoincrement())
+  type      MessageType    @default(TEXT)
+  message   String // text message of media URL
+  createdAt DateTime       @default(now())
+  status    MesssageStatus @default(SENT)
+  senderId  Int
+  targetId  Int
+  sender    User           @relation(name: "User messages", fields: [senderId], references: [id])
+  target    User           @relation(name: "Received messages", fields: [targetId], references: [id])
 }

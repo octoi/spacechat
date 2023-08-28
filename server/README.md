@@ -2,12 +2,7 @@
 
 > Server code for spacechat
 
-## Functionality
-
-- Realtime communication using `socket.io`
-- Handling Users, Rooms using `postgres`
-
-## Setup
+## SETUP
 
 1. Create `.env` file by checking `.env.example`
 2. Install packages
@@ -21,6 +16,114 @@
    $ pnpm dev
    ```
 
-## TODO
-[ ] Setup socket.io
-[ ] Setup redis for realtime user status update
+## API ROUTES
+
+### USER `/user`
+
+API routes user based functions
+
+#### Register User
+
+Create a new user account
+
+- **URL**
+  /user/register
+- **Method** <br />
+  `POST`
+- **Body**
+  ```json
+  {
+    "username": "<username>",
+    "name": "<name>",
+    "password": "<password>",
+    "profile": "<profile>"
+  }
+  ```
+- **Success Response**
+  - **Code**: 200
+    ```json
+    {
+       "id": <id>,
+       "username": "<username>",
+       "name": "<name>",
+       "profile": "<profile>",
+       "about": null,
+       "token": "JWT token"
+    }
+    ```
+- **Error Response**
+  - **Code**: 400 Bad Request <br />
+    **Content**: `{ message: 'Required params not provided' }`
+  - **Code**: 500 Internal Server Error <br />
+    **Content**: `{ message: 'Failed to register user' }`
+
+#### Login User
+
+Login to existing account
+
+- **URL**
+  /user/login
+- **Method** <br />
+  `POST`
+- **Body**
+  ```json
+  {
+    "username": "<username>",
+    "password": "<password>"
+  }
+  ```
+- **Success Response**
+  - **Code**: 200
+    ```json
+    {
+       "id": <id>,
+       "username": "<username>",
+       "name": "<name>",
+       "profile": "<profile>",
+       "about": "<about>",
+       "token": "JWT token"
+    }
+    ```
+- **Error Response**
+  - **Code**: 400 Bad Request <br />
+    **Content**: `{ message: 'Required params not provided' }`
+  - **Code**: 500 Internal Server Error <br />
+    **Content**: `{ message: 'Failed to login user' }`
+
+#### Update User
+
+Update user details
+
+- **URL**
+  /user/update
+- **Method** <br />
+  `PUT`
+- **Headers** <br />
+  `Authorization: Bearer <JWT token>`
+- **Body**
+  ```json
+  {
+    "username": "<username>",
+    "name": "<name>",
+    "password": "<password>",
+    "profile": "<profile>",
+    "about": "<about>"
+  }
+  ```
+- **Success Response**
+  - **Code**: 200
+    ```json
+    {
+       "id": <id>,
+       "username": "<username>",
+       "name": "<name>",
+       "profile": "<profile>",
+       "about": null,
+       "token": "JWT token"
+    }
+    ```
+- **Error Response**
+  - **Code**: 402 Bad Request <br />
+    **Content**: `{ message: 'Required params not provided' }`
+  - **Code**: 500 Internal Server Error <br />
+    **Content**: `{ message: 'Failed to register user' }`
