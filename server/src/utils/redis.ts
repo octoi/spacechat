@@ -1,8 +1,8 @@
-import redis from 'redis';
+import { createClient } from 'redis';
 
 const REDIS_URL = process.env.REDIS_URL;
 
-export const client = redis.createClient({ url: REDIS_URL });
+const client = createClient({ url: REDIS_URL });
 
 client.on('connect', () => console.log('[REDIS] CONNECTED'));
 
