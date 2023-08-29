@@ -31,10 +31,14 @@ export const sendMessageModel = ({
   senderId,
   targetId,
   message,
+  type,
+  status,
 }: {
   senderId: number;
   targetId: number;
   message: string;
+  type: 'TEXT' | 'VOICE' | 'IMAGE' | 'VIDEO' | 'DOCUMENT';
+  status?: 'SENT' | 'RECEIVED' | 'SEEN';
 }) => {
   return new Promise((resolve, reject) => {
     prismaClient.message
@@ -43,6 +47,8 @@ export const sendMessageModel = ({
           senderId,
           targetId,
           message,
+          type,
+          status,
         },
       })
       .then(resolve)
@@ -50,12 +56,12 @@ export const sendMessageModel = ({
   });
 };
 
-export const markMessagesAsReceivedModel = (targetId: number) => {
+export const markMessagesAsReceivedModel = (userId: number) => {
   return new Promise((resolve, reject) => {
     prismaClient.message
       .updateMany({
         where: {
-          targetId,
+          targetId: userId,
         },
         data: {
           status: 'RECEIVED',
