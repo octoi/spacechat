@@ -127,3 +127,5 @@ Update user details
     **Content**: `{ message: 'Required params not provided' }`
   - **Code**: 500 Internal Server Error <br />
     **Content**: `{ message: 'Failed to register user' }`
+
+## MESSAGE `/message`
