@@ -128,4 +128,4 @@ Update user details
   - **Code**: 500 Internal Server Error <br />
     **Content**: `{ message: 'Failed to register user' }`
 
-## MESSAGE `/message`
+### MESSAGE `/message`
