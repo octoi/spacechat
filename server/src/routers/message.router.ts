@@ -23,9 +23,7 @@ messageRouter.get('/:targetId', (req, res) => {
         targetId,
         page: parseInt(req.query?.page as string) || 0,
       })
-        .then(() =>
-          res.status(200).json({ message: 'Marked all messages as sent' })
-        )
+        .then((data) => res.status(200).json(data))
         .catch((err) => res.status(500).json({ message: err }));
     })
     .catch((err) => res.status(402).json({ message: err }));
