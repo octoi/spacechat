@@ -167,3 +167,37 @@ Get user chat list and mark all new messages for user as `received`
     **Content**: `{ message: 'Failed to fetch chat list' }`
 
 ### MESSAGE `/message`
+
+#### Get Messages With Target User
+
+Get messages with target users
+
+> Returns 20 messages by default
+
+- **URL**
+  /message/:targetId
+- **Method** <br />
+  `GET`
+- **QUERY**
+  `page`: pass page for cursor
+- **Headers** <br />
+  `Authorization: Bearer <JWT token>`
+- **Success Response**
+  - **Code**: 200
+    ```ts
+    interface Response {
+      id: number;
+      type: 'TEXT' | 'VOICE' | 'IMAGE' | 'VIDEO' | 'DOCUMENT';
+      message: string;
+      createdAt: Date;
+      status: 'SENT' | 'RECEIVED' | 'SEEN';
+      senderId: number;
+      targetId: number;
+    }
+    [];
+    ```
+- **Error Response**
+  - **Code**: 402 Bad Request <br />
+    **Content**: `{ message: 'Required params not provided' }`
+  - **Code**: 500 Internal Server Error <br />
+    **Content**: `{ message: 'Failed to fetch chat list' }`
