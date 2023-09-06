@@ -200,4 +200,4 @@ Get messages with target users
   - **Code**: 402 Bad Request <br />
     **Content**: `{ message: 'Required params not provided' }`
   - **Code**: 500 Internal Server Error <br />
-    **Content**: `{ message: 'Failed to fetch chat list' }`
+    **Content**: `{ message: 'Failed to load messages' }`
