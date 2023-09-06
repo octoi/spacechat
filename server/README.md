@@ -201,3 +201,22 @@ Get messages with target users
     **Content**: `{ message: 'Required params not provided' }`
   - **Code**: 500 Internal Server Error <br />
     **Content**: `{ message: 'Failed to load messages' }`
+
+#### Mark Loaded Messages as `Seen`
+
+Mark loaded messages as `seen`
+
+- **URL**
+  /message/:senderId
+- **Method** <br />
+  `POST`
+- **Headers** <br />
+  `Authorization: Bearer <JWT token>`
+- **Success Response**
+  - **Code**: 200
+    **Content**: `{ message: 'Marked all messages as seen' }`
+- **Error Response**
+  - **Code**: 402 Bad Request <br />
+    **Content**: `{ message: 'Provide a valid sender id' }`
+  - **Code**: 500 Internal Server Error <br />
+    **Content**: `{ message: 'Failed to mark status' }`
