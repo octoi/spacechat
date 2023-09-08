@@ -18,6 +18,9 @@
 
 ## API ROUTES
 
+<details>
+<summary>API DOCS</summary>
+
 ### USER `/user`
 
 API routes user based functions
@@ -219,4 +222,5 @@ Mark loaded messages as `seen`
   - **Code**: 402 Bad Request <br />
     **Content**: `{ message: 'Provide a valid sender id' }`
   - **Code**: 500 Internal Server Error <br />
-    **Content**: `{ message: 'Failed to mark status' }`
+  **Content**: `{ message: 'Failed to mark status' }`
+  </details>
