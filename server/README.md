@@ -4,6 +4,9 @@
 
 ## SETUP
 
+> [!NOTE]
+> Make sure you have Postgres, Redis, Node JS, NPM/YARN/PNPM installed.
+
 1. Create `.env` file by checking `.env.example`
 2. Install packages
    ```bash
