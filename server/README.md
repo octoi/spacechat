@@ -227,3 +227,10 @@ Mark loaded messages as `seen`
   - **Code**: 500 Internal Server Error <br />
   **Content**: `{ message: 'Failed to mark status' }`
   </details>
+
+## SOCKET EVENTS
+
+| Event        | Function                                                    | Input                  |
+| ------------ | ----------------------------------------------------------- | ---------------------- |
+| `connect`    | Store user details to redis & mark all messages as received | null                   |
+| `markAsSeen` | Mark messages with `targetId` as seen                       | `{ targetId: number }` |
