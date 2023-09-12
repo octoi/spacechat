@@ -234,3 +234,4 @@ Mark loaded messages as `seen`
 | ------------ | ----------------------------------------------------------- | ---------------------- |
 | `connect`    | Store user details to redis & mark all messages as received | null                   |
 | `markAsSeen` | Mark messages with `targetId` as seen                       | `{ targetId: number }` |
+| `message`    | Send message                                                | `MessageType`          |
