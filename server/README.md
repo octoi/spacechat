@@ -127,3 +127,96 @@ Update user details
     **Content**: `{ message: 'Required params not provided' }`
   - **Code**: 500 Internal Server Error <br />
     **Content**: `{ message: 'Failed to register user' }`
+
+#### Get User Chat List
+
+Get user chat list and mark all new messages for user as `received`
+
+- **URL**
+  /user/chat
+- **Method** <br />
+  `GET`
+- **Headers** <br />
+  `Authorization: Bearer <JWT token>`
+- **Success Response**
+  - **Code**: 200
+    ```ts
+    interface Response {
+      id: number;
+      name: string;
+      username: string;
+      profile: string;
+      sent: [
+        {
+          id: number;
+          type: 'TEXT' | 'VOICE' | 'IMAGE' | 'VIDEO' | 'DOCUMENT';
+          message: string;
+          createdAt: Date;
+          status: 'SENT' | 'RECEIVED' | 'SEEN';
+          senderId: number;
+          targetId: number;
+        }
+      ];
+    }
+    [];
+    ```
+- **Error Response**
+  - **Code**: 402 Bad Request <br />
+    **Content**: `{ message: 'Required params not provided' }`
+  - **Code**: 500 Internal Server Error <br />
+    **Content**: `{ message: 'Failed to fetch chat list' }`
+
+### MESSAGE `/message`
+
+#### Get Messages With Target User
+
+Get messages with target users
+
+> Returns 20 messages by default
+
+- **URL**
+  /message/:targetId
+- **Method** <br />
+  `GET`
+- **QUERY**
+  `page`: pass page for cursor
+- **Headers** <br />
+  `Authorization: Bearer <JWT token>`
+- **Success Response**
+  - **Code**: 200
+    ```ts
+    interface Response {
+      id: number;
+      type: 'TEXT' | 'VOICE' | 'IMAGE' | 'VIDEO' | 'DOCUMENT';
+      message: string;
+      createdAt: Date;
+      status: 'SENT' | 'RECEIVED' | 'SEEN';
+      senderId: number;
+      targetId: number;
+    }
+    [];
+    ```
+- **Error Response**
+  - **Code**: 402 Bad Request <br />
+    **Content**: `{ message: 'Required params not provided' }`
+  - **Code**: 500 Internal Server Error <br />
+    **Content**: `{ message: 'Failed to load messages' }`
+
+#### Mark Loaded Messages as `Seen`
+
+Mark loaded messages as `seen`
+
+- **URL**
+  /message/:senderId
+- **Method** <br />
+  `POST`
+- **Headers** <br />
+  `Authorization: Bearer <JWT token>`
+- **Success Response**
+  - **Code**: 200
+    **Content**: `{ message: 'Marked all messages as seen' }`
+- **Error Response**
+  - **Code**: 402 Bad Request <br />
+    **Content**: `{ message: 'Provide a valid sender id' }`
+  - **Code**: 500 Internal Server Error <br />
+    **Content**: `{ message: 'Failed to mark status' }`
