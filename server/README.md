@@ -4,6 +4,9 @@
 
 ## SETUP
 
+> [!IMPORTANT]
+> Make sure you have Postgres, Redis, Node JS, NPM/YARN/PNPM installed.
+
 1. Create `.env` file by checking `.env.example`
 2. Install packages
    ```bash
@@ -17,6 +20,9 @@
    ```
 
 ## API ROUTES
+
+<details>
+<summary>API DOCS</summary>
 
 ### USER `/user`
 
@@ -219,4 +225,13 @@ Mark loaded messages as `seen`
   - **Code**: 402 Bad Request <br />
     **Content**: `{ message: 'Provide a valid sender id' }`
   - **Code**: 500 Internal Server Error <br />
-    **Content**: `{ message: 'Failed to mark status' }`
+  **Content**: `{ message: 'Failed to mark status' }`
+  </details>
+
+## SOCKET EVENTS
+
+| Event        | Function                                                    | Input                  |
+| ------------ | ----------------------------------------------------------- | ---------------------- |
+| `connect`    | Store user details to redis & mark all messages as received | null                   |
+| `markAsSeen` | Mark messages with `targetId` as seen                       | `{ targetId: number }` |
+| `message`    | Send message                                                | `MessageType`          |
