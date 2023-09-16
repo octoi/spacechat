@@ -13,3 +13,24 @@ export interface UserType {
   about: string;
   token: string;
 }
+
+interface MessageType {
+  id: number;
+  type: 'TEXT' | 'VOICE' | 'IMAGE' | 'VIDEO' | 'DOCUMENT';
+  message: string;
+  createdAt: Date;
+  status: 'SENT' | 'RECEIVED' | 'SEEN';
+  senderId: number;
+  targetId: number;
+}
+
+export interface ChatListType {
+  id: number;
+  name: string;
+  username: string;
+  profile?: string;
+  sent: [MessageType];
+  _count: {
+    sent: number;
+  };
+}
