@@ -1,6 +1,7 @@
 import React from 'react';
 import { ReactComponent } from '@/lib/types';
 import Head from 'next/head';
+import { AuthWrap } from './auth-wrap';
 
 interface Props {
   title?: string;
@@ -26,7 +27,7 @@ export const Layout: ReactComponent<Props> = ({
         <meta property='og:type' content='website' />
       </Head>
 
-      {children}
+      <AuthWrap>{children}</AuthWrap>
     </>
   );
 };
