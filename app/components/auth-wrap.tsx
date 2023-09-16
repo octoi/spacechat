@@ -9,10 +9,6 @@ export const AuthWrap: ReactComponent = ({ children }) => {
   const { user } = userStore.getState();
 
   useEffect(() => {
-    if (router.pathname.includes(Paths.login)) {
-      return;
-    }
-
     if (!user) {
       router.push(Paths.login); // passing current path in order to redirect back to same page after login
     }
