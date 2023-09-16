@@ -3,7 +3,6 @@ import Link from 'next/link';
 import axios from 'axios';
 import { Layout } from '@/components/layout';
 import { Paths } from '@/lib/constants';
-import { ClipboardSignature } from 'lucide-react';
 import { Button, Center, Flex, Heading, Input } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -107,7 +106,6 @@ export default function RegisterPage() {
             <Button
               mt={3}
               className='btn-primary'
-              rightIcon={<ClipboardSignature size={18} />}
               size='lg'
               type='submit'
               w='full'
