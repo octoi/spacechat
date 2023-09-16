@@ -13,7 +13,7 @@ model User {
   username String    @unique
   name     String
   password String
-  profile  String
+  profile  String?
   about    String?
   sent     Message[] @relation("User messages")
   received Message[] @relation("Received messages")

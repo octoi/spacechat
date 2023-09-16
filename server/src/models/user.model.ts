@@ -34,7 +34,6 @@ export const registerUserModel = (data: {
   username: string;
   name: string;
   password: string;
-  profile: string;
 }) => {
   return new Promise(async (resolve, reject) => {
     data.password = await bcrypt.hash(data.password, 10);
