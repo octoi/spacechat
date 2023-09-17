@@ -1,6 +1,6 @@
 import React from 'react';
-import { ReactComponent } from '@/lib/types';
 import Head from 'next/head';
+import { ReactComponent } from '@/lib/types';
 
 interface Props {
   title?: string;

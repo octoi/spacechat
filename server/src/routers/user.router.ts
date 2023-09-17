@@ -15,10 +15,9 @@ userRouter.post('/register', (req, res) => {
     username: string;
     name: string;
     password: string;
-    profile: string;
   } = req.body;
 
-  if (!body?.username || !body?.name || !body?.password || !body?.profile) {
+  if (!body?.username || !body?.name || !body?.password) {
     res.status(400).json({ message: 'Required params not provided' });
     return;
   }
