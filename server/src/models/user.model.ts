@@ -140,6 +140,14 @@ export const getUserChatListModel = (userId: number) => {
                   // OR: [{ status: 'SENT' }, { status: 'RECEIVED' }],
                 },
               },
+              received: {
+                // including count which is not seen
+                where: {
+                  targetId: userId,
+                  status: 'SENT' || 'RECEIVED',
+                  // OR: [{ status: 'SENT' }, { status: 'RECEIVED' }],
+                },
+              },
             },
           },
           // get last message

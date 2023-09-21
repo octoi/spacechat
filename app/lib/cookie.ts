@@ -16,5 +16,5 @@ export const getUserFromCookie = () => {
 
   if (decodedData?.exp * 1000 < Date.now()) return null;
 
-  return decodedData;
+  return { ...decodedData, token: token };
 };

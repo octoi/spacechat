@@ -16,11 +16,15 @@ export const chatListStore = createStore<ChatListStore>((set) => ({
   chatsLoading: false,
   loadChats() {
     return new Promise((resolve, reject) => {
+      const { user } = userStore.getState();
+
+      if (!user) return;
+
       set({ chatsLoading: true });
       axios
         .get(getFullURL('/user/chat'), {
           headers: {
-            Authorization: `Bearer ${userStore.getState().user?.token}`,
+            Authorization: `Bearer ${user.token}`,
           },
         })
         .then(({ data }) => {
