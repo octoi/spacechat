@@ -149,6 +149,12 @@ export const getUserChatListModel = (userId: number) => {
               createdAt: 'desc',
             },
           },
+          received: {
+            take: 1,
+            orderBy: {
+              createdAt: 'desc',
+            },
+          },
         },
       })
       .then(resolve)
