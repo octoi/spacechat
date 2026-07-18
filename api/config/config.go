@@ -8,12 +8,13 @@ import (
 )
 
 type EnvConfig struct {
-	ServerPort string `env:"SERVER_PORT,required"`
+	Port       string `env:"PORT,required"`
 	DBHost     string `env:"DB_HOST,required"`
 	DBName     string `env:"DB_NAME,required"`
 	DBUser     string `env:"DB_USER,required"`
 	DBPassword string `env:"DB_PASSWORD,required"`
 	DBSSLMode  string `env:"DB_SSLMODE,required"`
+	JWTSecret  string `env:"JWT_SECRET,required"`
 }
 
 func NewEnvConfig() *EnvConfig {
