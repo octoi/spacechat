@@ -27,6 +27,7 @@ func Connect(cfg *config.EnvConfig) error {
 	// Auto migrate the schema
 	err = db.AutoMigrate(
 		&User{},
+		&OTP{},
 	)
 	if err != nil {
 		return fmt.Errorf("failed to auto-migrate database schema: %w", err)
