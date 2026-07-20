@@ -11,6 +11,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 
 	"github.com/octoi/spacechat/config"
@@ -23,18 +24,19 @@ func generateOTPCode() string {
 	return fmt.Sprintf("%06d", n.Int64())
 }
 
-func createAndLogOTP(phoneNumber string) (uint, error) {
+func createAndLogOTP(phoneNumber string) (string, error) {
 	code := generateOTPCode()
 	log.Printf("OTP for %s: %s", phoneNumber, code)
 
 	otp := database.OTP{
+		ID:          uuid.New().String(),
 		PhoneNumber: phoneNumber,
 		Code:        code,
 		ExpiresAt:   time.Now().Add(10 * time.Minute),
 	}
 
 	if err := database.DB.Create(&otp).Error; err != nil {
-		return 0, err
+		return "", err
 	}
 
 	return otp.ID, nil
@@ -50,8 +52,8 @@ type LoginRequest struct {
 }
 
 type VerifyRequest struct {
-	ID   uint   `json:"id" binding:"required"`
-	Code string `json:"code" binding:"required"`
+	AfaId string `json:"afa_id" binding:"required"`
+	Code  string `json:"code" binding:"required"`
 }
 
 func AccountRouter(rg *gin.RouterGroup, cfg *config.EnvConfig) {
@@ -92,7 +94,7 @@ func AccountRouter(rg *gin.RouterGroup, cfg *config.EnvConfig) {
 		c.JSON(http.StatusCreated, gin.H{
 			"message": "User registered, OTP sent",
 			"data": gin.H{
-				"id": otpID,
+				"afa_id": otpID,
 			},
 		})
 	})
@@ -124,7 +126,7 @@ func AccountRouter(rg *gin.RouterGroup, cfg *config.EnvConfig) {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "OTP sent",
 			"data": gin.H{
-				"id": otpID,
+				"afa_id": otpID,
 			},
 		})
 	})
@@ -137,10 +139,11 @@ func AccountRouter(rg *gin.RouterGroup, cfg *config.EnvConfig) {
 		}
 
 		var otp database.OTP
-		if err := database.DB.First(&otp, req.ID).Error; err != nil {
+		if err := database.DB.Where("id = ?", req.AfaId).First(&otp).Error; err != nil {
 			if errors.Is(err, gorm.ErrRecordNotFound) {
 				c.JSON(http.StatusNotFound, gin.H{"error": "OTP request not found"})
 			} else {
+				fmt.Println(err)
 				c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error checking OTP"})
 			}
 			return

@@ -11,7 +11,7 @@ type User struct {
 
 // OTP represents a one-time password request
 type OTP struct {
-	ID          uint      `gorm:"primaryKey"`
+	ID          string    `gorm:"primaryKey;type:uuid"`
 	PhoneNumber string    `gorm:"not null"`
 	Code        string    `gorm:"not null"`
 	ExpiresAt   time.Time `gorm:"not null"`
